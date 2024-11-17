@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class main
+    internal class De
     {
-        ///gamberge
     }
 }

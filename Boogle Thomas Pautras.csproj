@@ -36,7 +36,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="main.cs" />
+    <Compile Include="De.cs" />
+    <Compile Include="Dictionnaire.cs" />
+    <Compile Include="Joueur.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Plateau.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
