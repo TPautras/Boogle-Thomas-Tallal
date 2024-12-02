@@ -12,8 +12,9 @@ namespace Boogle_Thomas_Pautras
         private int n;
         private De[,] des;
         private Random r = new Random();
+        private Dictionary<char, (int, int)> DicoLettre = CréationDicoLettres();
 
-        public Plateau(int n) //test
+        public Plateau(int n) 
         {
             this.n = n;
             this.des = new De[n,n];
@@ -35,9 +36,9 @@ namespace Boogle_Thomas_Pautras
             while()
 
         }
-        public Dictionary CreeDico()
+        public Dictionary CréationDicoLettres()
         {
-            string cheminFichier = "Lettre.txt";
+            string cheminFichier = "assets/Lettre.txt";
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
             foreach (var ligne in File.ReadLines(cheminFichier))
             {
@@ -53,6 +54,29 @@ namespace Boogle_Thomas_Pautras
             }
             return dictionnaire;
 
+        }
+        public char ChoixLettre()
+        {
+
+            var DicoPoids = new List<(string Option, double DicoPoids)>();
+            double cumulativeSom = 0;
+
+            foreach (var DicoLettre in options)
+            {
+                cumulativeSom += DicoLettre[1];
+                DicoPoids.Add((DicoLettre.Key, cumulativeSom));
+            }
+
+=           Random random = new Random();
+            double randomValue = random.NextDouble() * cumulativeSom;
+
+            foreach (var (Option, DicoPoids) in DicoPoids)
+            {
+                if (randomValue <= DicoPoids)
+                {
+                    return Option;
+                }
+            }
         }
     public string toString()
         {
