@@ -13,7 +13,7 @@ namespace Boogle_Thomas_Pautras
         private De[,] des;
         private Random r = new Random();
 
-        public Plateau(int n)
+        public Plateau(int n) //test
         {
             this.n = n;
             this.des = new De[n,n];
