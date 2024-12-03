@@ -14,17 +14,20 @@ namespace Boogle_Thomas_Pautras
         private Random r = new Random();
         private Dictionary<char, (int, int)> DicoLettre = CréationDicoLettres();
 
-        public Plateau(int n) 
+        public Plateau(int n)
         {
             this.n = n;
-            this.des = new De[n,n];
-            for(int i=0; i < n; i++)
+            this.des = new De[n, n];
+            Dictionary<char, (int, int)> DicoLettre = CréationDicoLettres();
+
+            for (int i = 0; i < n; i++)
             {
-                for(int j = 0; j < n; j++)
+                for (int j = 0; j < n; j++)
                 {
-                    this.des[i,j] = new De();
+                    char[] lettres = ChoixLettres(6);
+                    this.des[i, j] = new De(lettres);
                 }
-            }   
+            }
         }
 
         public bool Test_Plateaua(string mot)
@@ -55,30 +58,38 @@ namespace Boogle_Thomas_Pautras
             return dictionnaire;
 
         }
-        public char ChoixLettre()
+        public char[] ChoixLettres(int nombreLettres)
         {
-
+            var lettresChoisies = new char[nombreLettres];
             var DicoPoids = new List<(string Option, double DicoPoids)>();
-            double cumulativeSom = 0;
 
-            foreach (var DicoLettre in options)
+            for (int i = 0; i < nombreLettres; i++)
             {
-                cumulativeSom += DicoLettre[1];
-                DicoPoids.Add((DicoLettre.Key, cumulativeSom));
-            }
+                double cumulativeSom = 0;
+                DicoPoids.Clear();
 
-=           Random random = new Random();
-            double randomValue = random.NextDouble() * cumulativeSom;
-
-            foreach (var (Option, DicoPoids) in DicoPoids)
-            {
-                if (randomValue <= DicoPoids)
+                foreach (var DicoLettre in options)
                 {
-                    return Option;
+                    cumulativeSom += DicoLettre[1];
+                    DicoPoids.Add((DicoLettre.Key, cumulativeSom));
+                }
+
+                Random random = new Random();
+                double randomValue = random.NextDouble() * cumulativeSom;
+
+                foreach (var (Option, DicoPoids) in DicoPoids)
+                {
+                    if (randomValue <= DicoPoids)
+                    {
+                        lettresChoisies[i] = Option[0];
+                        break;
+                    }
                 }
             }
+
+            return lettresChoisies;
         }
-    public string toString()
+        public string toString()
         {
             string message = "Le plateau est composé des dés suivants :\n";
 
