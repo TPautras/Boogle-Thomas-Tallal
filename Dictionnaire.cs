@@ -36,7 +36,7 @@ namespace Boogle_Thomas_Pautras
 
         public string toString()
         {
-            string res "Ce dictionnaire " + this.lang + " contient " + this.length + " : ";
+            string res = "Ce dictionnaire " + this.lang + " contient " + this.length + " mots : "; 
 
             foreach (string str in this.Dict)
             {

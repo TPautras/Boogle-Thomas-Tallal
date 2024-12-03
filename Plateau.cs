@@ -30,16 +30,16 @@ namespace Boogle_Thomas_Pautras
             }
         }
 
-        public bool Test_Plateaua(string mot)
-        {
-            if (Dictionaire.RechDichoRecursif(mot) == false|| mot.Length<=2)
-            {
-                return false;
-            }
-            while()
+        //public bool Test_Plateaua(string mot) /// TODO : fix
+        //{
+        //    if (Dictionaire.RechDichoRecursif(mot) == false|| mot.Length<=2)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
 
-        }
-        public Dictionary CréationDicoLettres()
+        //}
+        public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             string cheminFichier = "assets/Lettre.txt";
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
