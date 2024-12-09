@@ -12,12 +12,13 @@ namespace Boogle_Thomas_Pautras
         private List<Joueur> Joueurs;
         private Plateau PlateauActuel;
         private Dictionnaire DictionnaireActuel;
+        private bool gameIsActive = true;
 
         public Jeu(List<Joueur> joueurs, Plateau plateau, Dictionnaire dictionnaire)
         {
-            Joueurs = joueurs;
-            PlateauActuel = plateau;
-            DictionnaireActuel = dictionnaire;
+            this.Joueurs = joueurs;
+            this.PlateauActuel = plateau;
+            this.DictionnaireActuel = dictionnaire;
         }
         #endregion
 
@@ -67,10 +68,12 @@ namespace Boogle_Thomas_Pautras
         public void LancerPartie()
         {
             Console.WriteLine("La partie commence ! Bonne chance à tous les joueurs.\n");
-            foreach (var joueur in Joueurs)
+            while(this.gameIsActive)
             {
-                AfficherTour(joueur);
-                // Gestion du tour du joueur
+                foreach (var joueur in Joueurs)
+                {
+                    AfficherTour(joueur);
+                }
             }
             AfficherScores();
         }

@@ -9,5 +9,10 @@ namespace Boogle_Thomas_Pautras
     internal class Program
     {
         ///gamberge
+        static void Main(string[] args)
+        {
+
+            Console.ReadKey();
+        }
     }
 }
