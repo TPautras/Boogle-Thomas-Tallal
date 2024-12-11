@@ -25,13 +25,12 @@ public class NuageMots
 
 
     /// <summary>
-    /// Crée un nuage de mots à partir des mots fournis
-    /// utiliser la class Bitmap pour générer une image
-    /// On fait en sorte que les mots ne se chevauchent pas
-    /// Quand les mots se chevauchent, on les décale
-    /// Enfin le fichier est sauvegardé au format PNG
+    /// Génère une image de nuage de mots et la sauvegarde au format PNG.
+    /// Les mots sont placés selon leur fréquence d'apparition, avec une taille 
+    /// de police proportionnelle et des couleurs aléatoires. Les mots les plus 
+    /// fréquents sont traités en premier pour optimiser leur placement
     /// </summary>
-    /// <param name="cheminSortie"></param>
+    /// <param name="cheminSortie">String - Le chemin complet où sauvegarder l'image générée</param>
     public void GenererNuage(string cheminSortie)
     {
         using (Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
