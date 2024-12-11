@@ -30,8 +30,7 @@ public class NuageMots
     /// de police proportionnelle et des couleurs aléatoires. Les mots les plus 
     /// fréquents sont traités en premier pour optimiser leur placement
     /// </summary>
-    /// <param name="cheminSortie">String - Le chemin complet où sauvegarder l'image générée</param>
-    public void GenererNuage(string cheminSortie)
+    public void GenererNuage()
     {
         using (Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
         using (Graphics g = Graphics.FromImage(bitmap))
@@ -67,9 +66,11 @@ public class NuageMots
                     ));
                 }
             }
+            string cheminSortie = "assets/nuage_mots.png";
 
             try
             {
+                
                 bitmap.Save(cheminSortie, System.Drawing.Imaging.ImageFormat.Png);
             }
             catch (System.Runtime.InteropServices.ExternalException)
