@@ -36,6 +36,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+  <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="De.cs" />
     <Compile Include="Dictionnaire.cs" />
     <Compile Include="Joueur.cs" />
