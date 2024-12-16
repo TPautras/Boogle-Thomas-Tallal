@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class Dictionnaire
+    public class Dictionnaire
     {
         private List<string> dict;
         private int length;

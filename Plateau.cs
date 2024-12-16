@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class Plateau
+    public class Plateau
     {
         private int n;
         private De[,] des;
@@ -44,9 +44,8 @@ namespace Boogle_Thomas_Pautras
         //}
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
-            string cheminFichier = "assets/Lettre.txt";
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
-            foreach (var ligne in File.ReadLines(cheminFichier))
+            foreach (var ligne in File.ReadLines("../../Lettres.txt"))
             {
                 var parties = ligne.Split(';');
                 if (parties.Length == 3)
@@ -95,7 +94,7 @@ namespace Boogle_Thomas_Pautras
             return lettresChoisies;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Le plateau est composé des dés suivants :");

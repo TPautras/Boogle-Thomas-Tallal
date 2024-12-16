@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Boogle_Thomas_Pautras
 {
@@ -13,12 +14,14 @@ namespace Boogle_Thomas_Pautras
         private Plateau PlateauActuel;
         private Dictionnaire DictionnaireActuel;
         private bool gameIsActive = true;
+        private int nbTours;
 
-        public Jeu(List<Joueur> joueurs, Plateau plateau, Dictionnaire dictionnaire)
+        public Jeu(List<Joueur> joueurs, Plateau plateau, Dictionnaire dictionnaire, int nbTours)
         {
             this.Joueurs = joueurs;
             this.PlateauActuel = plateau;
             this.DictionnaireActuel = dictionnaire;
+            this.nbTours = nbTours;
         }
         #endregion
 
@@ -47,7 +50,7 @@ namespace Boogle_Thomas_Pautras
 
         public void AfficherTour(Joueur joueur)
         {
-            Console.WriteLine($"C'est le tour de {joueur.Nom} !");
+            Console.WriteLine($"C'est le tour de {joueur.Name} !");
             Console.WriteLine("============================");
             Console.WriteLine("Voici le plateau :");
             Console.WriteLine(PlateauActuel.ToString());
@@ -59,7 +62,7 @@ namespace Boogle_Thomas_Pautras
             Console.WriteLine("Scores finaux :");
             foreach (var joueur in Joueurs)
             {
-                Console.WriteLine($"{joueur.Nom} : {joueur.Score} points");
+                Console.WriteLine($"{joueur.Name} : {joueur.Score} points");
             }
         }
 
@@ -86,15 +89,45 @@ namespace Boogle_Thomas_Pautras
 
         public void LancerPartie()
         {
-            Console.WriteLine("La partie commence ! Bonne chance à tous les joueurs.\n");
-            while(this.gameIsActive)
+            Console.WriteLine("La partie commence ! Bonne chance à tous les joueurs.");
+            for (int tour = 1; tour <= nbTours; tour++)
             {
+                Console.WriteLine($"Début du tour {tour}/{nbTours}.");
                 foreach (var joueur in Joueurs)
                 {
-                    AfficherTour(joueur);
+                    Console.WriteLine($"C'est le tour de {joueur.Name} !");
+                    Stopwatch chrono = Stopwatch.StartNew();
+                    List<string> motsTrouves = new List<string>();
+
+                    while (chrono.Elapsed.TotalMinutes < 3)
+                    {
+                        Console.WriteLine("Entrez un mot ou appuyez sur Entrée pour terminer : ");
+                        string mot = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(mot)) break;
+
+                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !motsTrouves.Contains(mot))
+                        {
+                            motsTrouves.Add(mot);
+                            joueur.Score += mot.Length;
+                            Console.WriteLine($"Mot accepté : {mot} (+{mot.Length} points)");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Mot invalide ou déjà trouvé.");
+                        }
+                    }
+
+                    chrono.Stop();
+                    Console.WriteLine($"Temps écoulé pour {joueur.Name}.");
                 }
             }
-            AfficherScores();
+
+            Console.WriteLine("La partie est terminée. Voici les scores finaux :");
+            foreach (var joueur in Joueurs)
+            {
+                Console.WriteLine($"{joueur.Name} : {joueur.Score} points");
+            }
         }
     }
 }

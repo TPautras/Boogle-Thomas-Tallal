@@ -7,6 +7,7 @@
     <ProjectGuid>{3A4FFF02-2BB4-488E-80D5-BEA33D8A2136}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Boogle_Thomas_Pautras</RootNamespace>
+    <RuntimeIdentifiers>win</RuntimeIdentifiers>
     <AssemblyName>Boogle Thomas Pautras</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,11 +50,20 @@
     <Content Include="assets\Lettres.txt" />
     <Content Include="assets\MotsPossiblesEN.txt" />
     <Content Include="assets\MotsPossiblesFR.txt" />
+    <Content Include="Lettres.txt" />
   </ItemGroup>
   <ItemGroup>
-  <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="assets\Lettre.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Drawing.Common.9.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>

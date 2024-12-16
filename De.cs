@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class De
+    public class De
     {
         private char[] letters = new char[6];
         private char finalLetter;
