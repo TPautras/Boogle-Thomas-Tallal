@@ -23,9 +23,7 @@ namespace Boogle_Thomas_Pautras
             int nbTours = int.Parse(Console.ReadLine());
 
             var dictionnaire = new Dictionnaire(
-                new List<string> { "chat", "chien", "maison", "voiture", "arbre" },
-                5,
-                "Français"
+                "FR"
             );
 
             var plateau = new Plateau(4);

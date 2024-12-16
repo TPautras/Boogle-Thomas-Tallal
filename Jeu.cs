@@ -101,6 +101,10 @@ namespace Boogle_Thomas_Pautras
 
                     while (chrono.Elapsed.TotalMinutes < 3)
                     {
+                        TimeSpan restant = TimeSpan.FromMinutes(3) - chrono.Elapsed;
+                        Console.WriteLine(this.PlateauActuel.ToString());
+                        Console.WriteLine();
+                        Console.WriteLine($"Temps restant : {restant.Minutes:D2}:{restant.Seconds:D2}");
                         Console.WriteLine("Entrez un mot ou appuyez sur Entrée pour terminer : ");
                         string mot = Console.ReadLine();
 

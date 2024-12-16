@@ -3,20 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Boogle_Thomas_Pautras
 {
     public class Dictionnaire
     {
         private List<string> dict;
-        private int length;
-        private string lang = "Fançais";
+        private int length = 0;
+        private string lang = "FR";
 
-        public Dictionnaire(List<string> dict, int length, string lang)
+        public Dictionnaire(string lang)
         {
-            this.dict = dict;
-            this.length = length;
             this.lang = lang;
+            this.dict = new List<string>();
+            if (this.lang == "FR")
+            {
+                var lines = File.ReadLines("../../assets/MotsPossibles"+this.lang+".txt");
+                foreach(var line in  lines)
+                {
+                    var words = line.Split(' ');
+                    if(words.Length > 0)
+                    {
+                        for(int i = 0; i < words.Length; i++)
+                        {
+                            dict.Add(words[i]);
+                        }
+                    }
+                }
+                
+            };
+            this.length = dict.Count;
         }
 
         public string Lang
@@ -38,7 +55,7 @@ namespace Boogle_Thomas_Pautras
         {
             string res = "Ce dictionnaire " + this.lang + " contient " + this.length + " mots : "; 
 
-            foreach (string str in this.Dict)
+            foreach (string str in this.dict)
             {
                 res += str + "\n";
             }

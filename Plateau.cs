@@ -13,6 +13,7 @@ namespace Boogle_Thomas_Pautras
         private De[,] des;
         private Random r = new Random();
         private Dictionary<char, (int, int)> DicoLettre;
+        private char[,] plateauActuel;
 
         public Plateau(int n)
         {
@@ -21,6 +22,7 @@ namespace Boogle_Thomas_Pautras
 
             // Initialisation du dictionnaire de lettres
             this.DicoLettre = CréationDicoLettres();
+            this.plateauActuel = new char[n,n];
 
             // Création des dés
             for (int i = 0; i < n; i++)
@@ -29,6 +31,8 @@ namespace Boogle_Thomas_Pautras
                 {
                     char[] lettres = ChoixLettres(6);
                     this.des[i, j] = new De(lettres);
+                    this.des[i, j].Lance(this.r);
+                    this.plateauActuel[i, j] = this.des[i, j].FinalLetter;
                 }
             }
         }
@@ -45,7 +49,7 @@ namespace Boogle_Thomas_Pautras
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
-            foreach (var ligne in File.ReadLines("../../Lettres.txt"))
+            foreach (var ligne in File.ReadLines("../../assets/Lettres.txt"))
             {
                 var parties = ligne.Split(';');
                 if (parties.Length == 3)
@@ -96,19 +100,19 @@ namespace Boogle_Thomas_Pautras
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Le plateau est composé des dés suivants :");
+            string res = "";
+            res += "Le plateau est composé des dés suivants :\n";
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    sb.Append(this.des[i, j].ToString()).Append(" ");
+                    res += this.plateauActuel[i, j] + " ";
                 }
-                sb.AppendLine();
+                res += "\n";
             }
 
-            return sb.ToString();
+            return res;
         }
     }
 }
