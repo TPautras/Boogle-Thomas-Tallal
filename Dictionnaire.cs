@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Boogle_Thomas_Pautras
 {
@@ -12,28 +13,39 @@ namespace Boogle_Thomas_Pautras
         private List<string> dict;
         private int length = 0;
         private string lang = "FR";
+        private Dictionary<int, List<string>> dictionarySorted = new Dictionary<int, List<string>>();
 
         public Dictionnaire(string lang)
         {
             this.lang = lang;
             this.dict = new List<string>();
-            if (this.lang == "FR")
+            var lines = File.ReadLines("../../assets/MotsPossibles"+this.lang+".txt");
+            foreach (var line in lines)
             {
-                var lines = File.ReadLines("../../assets/MotsPossibles"+this.lang+".txt");
-                foreach(var line in  lines)
+                var words = line.Split(' ');
+                if (words.Length > 0)
                 {
-                    var words = line.Split(' ');
-                    if(words.Length > 0)
+                    for (int i = 0; i < words.Length; i++)
                     {
-                        for(int i = 0; i < words.Length; i++)
-                        {
-                            dict.Add(words[i]);
-                        }
+                        dict.Add(words[i]);
                     }
                 }
-                
-            };
+            }
             this.length = dict.Count;
+            dict.Sort();
+            foreach (string mot in dict)
+            {
+                int longueur = mot.Length;
+                if (!dictionarySorted.ContainsKey(longueur))
+                {
+                    dictionarySorted[longueur] = new List<string>();
+                }
+                dictionarySorted[longueur].Add(mot);
+            }
+            foreach (var key in dictionarySorted.Keys)
+            {
+                dictionarySorted[key].Sort();
+            }
         }
 
         public string Lang
