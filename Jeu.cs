@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class Jeu
+    public class Jeu
     {
         #region Initialisation
         private List<Joueur> Joueurs;
@@ -60,6 +60,25 @@ namespace Boogle_Thomas_Pautras
             {
                 Console.WriteLine($"{joueur.Nom} : {joueur.Score} points");
             }
+        }
+
+        public static void AfficherBanniere()
+        {
+            Console.WriteLine("======================================================");
+            Console.WriteLine("888888b.                              888             ");
+            Console.WriteLine("888  \"88b                             888              ");
+            Console.WriteLine("888  .88P                             888              ");
+            Console.WriteLine("8888888K.   .d88b.   .d88b.   .d88b.  888  .d88b.     ");
+            Console.WriteLine("888  \"Y88b d88\"\"88b d88\"\"88b d88P\"88b 888 d8P Y8b    ");
+            Console.WriteLine("888    888 888  888 888  888 888  888 888 88888888   ");
+            Console.WriteLine("888   d88P Y88..88P Y88..88P Y88b 888 888 Y8b.       );
+            Console.WriteLine("8888888P\"   \"Y88P\"   \"Y88P\"   \"Y88888 888  \"Y8888   ");
+            Console.WriteLine("                                  888               ");
+            Console.WriteLine("                             Y8b d88P               ");
+            Console.WriteLine("                              \"Y88P\"                ");
+            Console.WriteLine("======================================================");
+            Console.WriteLine("         Bienvenue dans le jeu de Boogle !          ");
+            Console.WriteLine("======================================================\n");
         }
 
         #endregion

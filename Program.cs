@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Boogle_Thomas_Pautras
 {
-    internal class Program
+    class Program
     {
-        ///gamberge
+        static void Main(string[] args)
+        {
+            Jeu jeu = new Jeu(new List<Joueur>(), new Plateau(), new Dictionnaire());
+            jeu.AfficherMenu();
+        }
+
     }
 }
