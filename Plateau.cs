@@ -12,14 +12,17 @@ namespace Boogle_Thomas_Pautras
         private int n;
         private De[,] des;
         private Random r = new Random();
-        private Dictionary<char, (int, int)> DicoLettre = CréationDicoLettres();
+        private Dictionary<char, (int, int)> DicoLettre;
 
         public Plateau(int n)
         {
             this.n = n;
             this.des = new De[n, n];
-            Dictionary<char, (int, int)> DicoLettre = CréationDicoLettres();
 
+            // Initialisation du dictionnaire de lettres
+            this.DicoLettre = CréationDicoLettres();
+
+            // Création des dés
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -56,30 +59,32 @@ namespace Boogle_Thomas_Pautras
                 }
             }
             return dictionnaire;
-
         }
+
         public char[] ChoixLettres(int nombreLettres)
         {
             var lettresChoisies = new char[nombreLettres];
-            var DicoPoids = new List<(string Option, double DicoPoids)>();
+            var optionsAvecCumul = new List<(string Option, double Cumul)>();
 
             for (int i = 0; i < nombreLettres; i++)
             {
                 double cumulativeSom = 0;
-                DicoPoids.Clear();
+                optionsAvecCumul.Clear();
 
-                foreach (var DicoLettre in options)
+                // On utilise le dictionnaire DicoLettre pour générer des lettres pondérées.
+                foreach (var kvp in this.DicoLettre)
                 {
-                    cumulativeSom += DicoLettre[1];
-                    DicoPoids.Add((DicoLettre.Key, cumulativeSom));
+                    // On suppose que kvp.Value.Item2 représente le poids de la lettre.
+                    cumulativeSom += kvp.Value.Item2;
+                    optionsAvecCumul.Add((kvp.Key.ToString(), cumulativeSom));
                 }
 
-                Random random = new Random();
-                double randomValue = random.NextDouble() * cumulativeSom;
+                double randomValue = r.NextDouble() * cumulativeSom;
 
-                foreach (var (Option, DicoPoids) in DicoPoids)
+                // Recherche de la lettre correspondante dans la distribution cumulative
+                foreach (var (Option, Cumul) in optionsAvecCumul)
                 {
-                    if (randomValue <= DicoPoids)
+                    if (randomValue <= Cumul)
                     {
                         lettresChoisies[i] = Option[0];
                         break;
@@ -89,16 +94,22 @@ namespace Boogle_Thomas_Pautras
 
             return lettresChoisies;
         }
-        public string toString()
-        {
-            string message = "Le plateau est composé des dés suivants :\n";
 
-            for (int i = 0; i < 16; i++)
+        public string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Le plateau est composé des dés suivants :");
+
+            for (int i = 0; i < n; i++)
             {
-                message += des[i].toString() + "\n";
+                for (int j = 0; j < n; j++)
+                {
+                    sb.Append(this.des[i, j].ToString()).Append(" ");
+                }
+                sb.AppendLine();
             }
 
-            return message;
+            return sb.ToString();
         }
     }
 }
