@@ -87,7 +87,29 @@ namespace Boogle_Thomas_Pautras
 
         #endregion
 
-        public void LancerPartie()
+        public void LancerPartie(Jeu jeu)
+        {
+            string choix = Console.ReadLine();
+            while (choix != "3")
+            {
+                switch (choix)
+                {
+                    case "1":
+                        jeu.LancerTour();
+                        break;
+                    case "2":
+                        jeu.AfficherRegles();
+                        break;
+                    default:
+                        Console.WriteLine("Choix invalide. Veuillez réessayer.");
+                        break;
+                }
+
+                jeu.AfficherMenu();
+                choix = Console.ReadLine();
+            }
+        }
+        public void LancerTour()
         {
             Console.WriteLine("La partie commence ! Bonne chance à tous les joueurs.");
             for (int tour = 1; tour <= nbTours; tour++)
@@ -109,7 +131,7 @@ namespace Boogle_Thomas_Pautras
 
                         if (string.IsNullOrEmpty(mot)) break;
 
-                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot))
+                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot) && PlateauActuel.surPlateau(mot))
                         {
                             joueur.Add_Mot(mot);
                             joueur.Score += mot.Length;

@@ -33,25 +33,7 @@ namespace Boogle_Thomas_Pautras
             Jeu.AfficherBanniere();
             jeu.AfficherMenu();
 
-            string choix = Console.ReadLine();
-            while (choix != "3")
-            {
-                switch (choix)
-                {
-                    case "1":
-                        jeu.LancerPartie();
-                        break;
-                    case "2":
-                        jeu.AfficherRegles();
-                        break;
-                    default:
-                        Console.WriteLine("Choix invalide. Veuillez réessayer.");
-                        break;
-                }
-
-                jeu.AfficherMenu();
-                choix = Console.ReadLine();
-            }
+            jeu.LancerPartie(jeu);
 
             Console.WriteLine("Merci d'avoir joué à Boogle !");
         }

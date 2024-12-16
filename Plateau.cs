@@ -37,15 +37,62 @@ namespace Boogle_Thomas_Pautras
             }
         }
 
-        //public bool Test_Plateaua(string mot) /// TODO : fix
-        //{
-        //    if (Dictionaire.RechDichoRecursif(mot) == false|| mot.Length<=2)
-        //    {
-        //        return false;
-        //    }
-        //    return true;
+        public bool surPlateau(string mot)
+        {
+            if (mot.Length != 0 && mot != null)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (plateauActuel[i, j] == mot[0])
+                        {
+                            bool[,] casestestees = new bool[n, n];
+                            if (ExistenceDuMot(i, j, 0, mot, casestestees))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
 
-        //}
+
+            return false;
+
+        }
+
+        private bool ExistenceDuMot(int i, int j, int cpt, string mot, bool[,] casestestees)
+        {
+            if (cpt == mot.Length)
+            {
+                return true;
+            }
+
+            if (i < 0 || i >= n || j < 0 || j >= n || casestestees[i, j] || plateauActuel[i, j] != mot[cpt])
+            {
+                return false;
+            }
+
+            casestestees[i, j] = true;
+
+            int[] coordonneeslongueur = { -1, 0, 1, 1, 1, 0, -1, -1 };
+            int[] coordonneeslargeur = { -1, -1, -1, 0, 1, 1, 1, 0 };
+
+            for (int k = 0; k < coordonneeslargeur.Length; k++)
+            {
+                if ((i + coordonneeslongueur[k]) > 0 || (i + coordonneeslongueur[k]) < n || (j + coordonneeslargeur[k]) > 0 || (j + coordonneeslargeur[k]) < n)
+                {
+
+                    if (ExistenceDuMot(i + coordonneeslongueur[k], j + coordonneeslargeur[k], cpt + 1, mot, casestestees))
+                    {
+                        return true;
+                    }
+                }
+            }
+            casestestees[i, j] = false;
+            return false;
+        }
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
@@ -84,7 +131,7 @@ namespace Boogle_Thomas_Pautras
 
                 double randomValue = r.NextDouble() * cumulativeSom;
 
-                // Recherche de la lettre correspondante dans la distribution cumulative
+                // Recherche de la lettre correspondante
                 foreach (var (Option, Cumul) in optionsAvecCumul)
                 {
                     if (randomValue <= Cumul)
