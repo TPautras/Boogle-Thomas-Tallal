@@ -97,7 +97,6 @@ namespace Boogle_Thomas_Pautras
                 {
                     Console.WriteLine($"C'est le tour de {joueur.Name} !");
                     Stopwatch chrono = Stopwatch.StartNew();
-                    List<string> motsTrouves = new List<string>();
 
                     while (chrono.Elapsed.TotalMinutes < 3)
                     {
@@ -110,9 +109,9 @@ namespace Boogle_Thomas_Pautras
 
                         if (string.IsNullOrEmpty(mot)) break;
 
-                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !motsTrouves.Contains(mot))
+                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot))
                         {
-                            motsTrouves.Add(mot);
+                            joueur.Add_Mot(mot);
                             joueur.Score += mot.Length;
                             Console.WriteLine($"Mot accepté : {mot} (+{mot.Length} points)");
                         }
