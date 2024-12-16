@@ -72,7 +72,7 @@ namespace Boogle_Thomas_Pautras
             Console.WriteLine("8888888K.   .d88b.   .d88b.   .d88b.  888  .d88b.     ");
             Console.WriteLine("888  \"Y88b d88\"\"88b d88\"\"88b d88P\"88b 888 d8P Y8b    ");
             Console.WriteLine("888    888 888  888 888  888 888  888 888 88888888   ");
-            Console.WriteLine("888   d88P Y88..88P Y88..88P Y88b 888 888 Y8b.       );
+            Console.WriteLine("888   d88P Y88..88P Y88..88P Y88b 888 888 Y8b.       ");
             Console.WriteLine("8888888P\"   \"Y88P\"   \"Y88P\"   \"Y88888 888  \"Y8888   ");
             Console.WriteLine("                                  888               ");
             Console.WriteLine("                             Y8b d88P               ");
