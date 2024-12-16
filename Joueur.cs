@@ -11,7 +11,7 @@ namespace Boogle_Thomas_Pautras
     {
         private string name;
         private int score;
-        private string[] words;
+        private string[] words = new string[0]; 
 
         public Joueur(string name) {
             this.name = name;
