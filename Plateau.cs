@@ -61,23 +61,22 @@ namespace Boogle_Thomas_Pautras
         /// <returns type=bool></returns>
         public bool surPlateau(string mot)
         {
-            if (mot.Length != 0 && mot != null)
+            
+            for (int i = 0; i < n; i++)
             {
-                for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
                 {
-                    for (int j = 0; j < n; j++)
+                    if (plateauActuel[i, j] == mot[0])
                     {
-                        if (plateauActuel[i, j] == mot[0])
+                        bool[,] casestestees = new bool[n, n];
+                        if (motPossible(i, j, 0, mot, casestestees))
                         {
-                            bool[,] casestestees = new bool[n, n];
-                            if (ExistenceDuMot(i, j, 0, mot, casestestees))
-                            {
-                                return true;
-                            }
+                            return true;
                         }
                     }
                 }
             }
+            
 
 
             return false;
@@ -96,35 +95,35 @@ namespace Boogle_Thomas_Pautras
         /// <param name="mot">Mot à trouver</param>
         /// <param name="casestestees">Coordonnées des cases déjà testées</param>
         /// <returns type=bool>Booleen représentant la possibilité de faire le mot avec les cases du tableau</returns>
-        private bool ExistenceDuMot(int i, int j, int cpt, string mot, bool[,] casestestees)
+        private bool motPossible(int i, int j, int counter, string mot, bool[,] tested)
         {
-            if (cpt == mot.Length)
+            if (counter == mot.Length)
             {
                 return true;
             }
-
-            if (i < 0 || i >= n || j < 0 || j >= n || casestestees[i, j] || plateauActuel[i, j] != mot[cpt])
+            bool oob = i < 0 || i >= n || j < 0 || j >= n || tested[i, j] || plateauActuel[i, j] != mot[counter];
+            if (oob)
             {
                 return false;
             }
 
-            casestestees[i, j] = true;
+            tested[i, j] = true;
 
             int[] coordonneeslongueur = { -1, 0, 1, 1, 1, 0, -1, -1 };
             int[] coordonneeslargeur = { -1, -1, -1, 0, 1, 1, 1, 0 };
 
             for (int k = 0; k < coordonneeslargeur.Length; k++)
             {
-                if ((i + coordonneeslongueur[k]) > 0 || (i + coordonneeslongueur[k]) < n || (j + coordonneeslargeur[k]) > 0 || (j + coordonneeslargeur[k]) < n)
+                bool oob2 = (i + coordonneeslongueur[k]) > 0 || (i + coordonneeslongueur[k]) < n || (j + coordonneeslargeur[k]) > 0 || (j + coordonneeslargeur[k]) < n;
+                if (oob2)
                 {
-
-                    if (ExistenceDuMot(i + coordonneeslongueur[k], j + coordonneeslargeur[k], cpt + 1, mot, casestestees))
+                    if (motPossible(i + coordonneeslongueur[k], j + coordonneeslargeur[k], counter + 1, mot, tested))
                     {
                         return true;
                     }
                 }
             }
-            casestestees[i, j] = false;
+            tested[i, j] = false;
             return false;
         }
 
