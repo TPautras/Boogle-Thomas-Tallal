@@ -9,6 +9,7 @@ namespace Boogle_Thomas_Pautras
 {
     public class Joueur
     {
+        #region Attributs, propriétés et Constructeur
         private string name;
         private int score;
         private string[] words = new string[0]; 
@@ -34,8 +35,9 @@ namespace Boogle_Thomas_Pautras
             set { score = value; }
         }
         public string[] Words { get {  return words; } }
+        #endregion
 
-
+        #region Méthodes de manipulation de la liste de mots
         /// <summary>
         /// Teste si le mot passé appartient déjà aux mots
         /// trouvés par le joueur pendant la partie
@@ -66,7 +68,9 @@ namespace Boogle_Thomas_Pautras
             tmp[words.Length] = mot;
             this.words = tmp;
         }
+        #endregion
 
+        #region toString()
         /// <summary>
         /// Retourne une chaîne de caractères qui décrit un joueur.
         /// </summary>
@@ -83,5 +87,6 @@ namespace Boogle_Thomas_Pautras
 
             return res;
         }
+        #endregion
     }
 }

@@ -9,12 +9,20 @@ namespace Boogle_Thomas_Pautras
 {
     public class Plateau
     {
+        #region Attributs et constructeur
         private int n;
         private De[,] des;
         private Random r = new Random();
         private Dictionary<char, (int, int)> DicoLettre;
-        private char[,] plateauActuel;
+        private char[,] plateauActuel; //Ne stocke que les char et non des instances de De
 
+        /// <summary>
+        /// Constructeur non naturel du plateau,
+        /// qui prend un entier n représentant la taille.
+        /// Celui ci vaut ici toujours 4 mais on pourrait
+        /// faire varier la taille du plateau si nécessaire
+        /// </summary>
+        /// <param name="n">Taille du plateau</param>
         public Plateau(int n)
         {
             this.n = n;
@@ -31,12 +39,26 @@ namespace Boogle_Thomas_Pautras
                 {
                     char[] lettres = ChoixLettres(6);
                     this.des[i, j] = new De(lettres);
-                    this.des[i, j].Lance(this.r);
-                    this.plateauActuel[i, j] = this.des[i, j].FinalLetter;
+                    this.des[i, j].Lance(this.r); //Permet "d'initialiser" la face visible du dé de ce tableau
+                    this.plateauActuel[i, j] = this.des[i, j].FinalLetter; //Update l'autre tableau ne contenant que les char et non les instances de Dé
                 }
             }
         }
+        #endregion
 
+        #region Méthodes de vérification
+        /// <summary>
+        /// Méthode de vérification si le mot 
+        /// est bien présent sur le plateau.
+        /// Est couplée à existence du mot
+        /// Appelle existence dès qu'elle trouve une lettre 
+        /// correspondant à la première lettre.
+        /// C'est la fonction qui est appelée à l'extérieure
+        /// puisqu'elle retourne un booléen représentant la présence
+        /// ou non du mot sur le plateau
+        /// </summary>
+        /// <param name="mot"></param>
+        /// <returns type=bool></returns>
         public bool surPlateau(string mot)
         {
             if (mot.Length != 0 && mot != null)
@@ -62,6 +84,18 @@ namespace Boogle_Thomas_Pautras
 
         }
 
+        /// <summary>
+        /// En partant d'une "case" donnée, cherche
+        /// semi récursivement autour afin de savoir
+        /// si il est possible de faire le mot avec des 
+        /// cases adjacentes
+        /// </summary>
+        /// <param name="i">Coordonnée en abscisses</param>
+        /// <param name="j">Coordonnée en ordonnée</param>
+        /// <param name="cpt">Compteur de lettres trouvées sur le plateau</param>
+        /// <param name="mot">Mot à trouver</param>
+        /// <param name="casestestees">Coordonnées des cases déjà testées</param>
+        /// <returns type=bool>Booleen représentant la possibilité de faire le mot avec les cases du tableau</returns>
         private bool ExistenceDuMot(int i, int j, int cpt, string mot, bool[,] casestestees)
         {
             if (cpt == mot.Length)
@@ -93,6 +127,19 @@ namespace Boogle_Thomas_Pautras
             casestestees[i, j] = false;
             return false;
         }
+
+        /// <summary>
+        /// Création d'un dictionnaire à
+        /// partir du fichier Lettres.txt
+        /// Celui-ci contient le poids de chaque lettre,
+        /// ainsi que le nombre de points qui lui est associé
+        /// </summary>
+        /// <returns type=Dictionary<char, (int, int)>>
+        /// Retourne un dictionnaire avec un char en 
+        /// entrée, à savoir la lettre.
+        /// Et en valeur un doubleton contenant en première valeur
+        /// le nombre de point et en deuxième le poids de la lettre
+        /// </returns>
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
@@ -110,7 +157,17 @@ namespace Boogle_Thomas_Pautras
             }
             return dictionnaire;
         }
+        #endregion
 
+        #region Calcul de points, Choix lettres, toString
+        /// <summary>
+        /// Méthode calculant le nombre de points
+        /// que vaut un mot passé en entrée à l'aide 
+        /// du dictionnaire recensant le nombre
+        /// de points définis par lettre
+        /// </summary>
+        /// <param name="mot">Mot dont on veut vérifier la valeur en points</param>
+        /// <returns></returns>
         public int calculerPoints(string mot)
         {
             int res = 0;
@@ -127,6 +184,17 @@ namespace Boogle_Thomas_Pautras
             return res;
         }
 
+        /// <summary>
+        /// Fonction générant des tableaux de char
+        /// en prenant en compte le poids des lettres
+        /// tels que définis par Lettres.txt.
+        /// La fonction calcule le poids total puis
+        /// à l'aide d'un nombre aléatoire, choisit un lettre
+        /// Ce processus est itérée un nombre de fois passé en 
+        /// paramètre
+        /// </summary>
+        /// <param name="nombreLettres">Nombre d'itérations de la fonction</param>
+        /// <returns type=char[]>Tableau de caractères choisis aléatoirement en fonction des poids définis dans Lettres.txt</returns>
         public char[] ChoixLettres(int nombreLettres)
         {
             var lettresChoisies = new char[nombreLettres];
@@ -161,6 +229,18 @@ namespace Boogle_Thomas_Pautras
             return lettresChoisies;
         }
 
+        /// <summary>
+        /// Fonction retournant une string contenant
+        /// les informations définissant le plateau.
+        /// A savoir les différents caractères qui 
+        /// sont les faces visibles des différents
+        /// dés. 
+        /// On utilise override pour montrer que l'on
+        /// comprend à quoi il sert, en l'ocurrence passer
+        /// par dessus la méthode ToString de base pour à
+        /// la place du type, retourner une chaine descriptive
+        /// </summary>
+        /// <returns type=string>String descriptive du plateau</returns>
         public override string ToString()
         {
             string res = "";
@@ -177,5 +257,6 @@ namespace Boogle_Thomas_Pautras
 
             return res;
         }
+        #endregion
     }
 }
