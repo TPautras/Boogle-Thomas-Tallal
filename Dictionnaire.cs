@@ -10,6 +10,7 @@ namespace Boogle_Thomas_Pautras
 {
     public class Dictionnaire
     {
+        #region Attributs, constructeurs et propriétés
         private List<string> dict;
         private int length = 0;
         private string lang = "FR";
@@ -19,7 +20,7 @@ namespace Boogle_Thomas_Pautras
         {
             this.lang = lang;
             this.dict = new List<string>();
-            string path = "../../assets/MotsPossibles" + this.lang + ".txt";
+            string path = "../../../Boogle-Thomas-Tallal/assets/MotsPossibles" + this.lang + ".txt";
             var lines = File.ReadLines(path);
             foreach (var line in lines)
             {
@@ -63,7 +64,15 @@ namespace Boogle_Thomas_Pautras
         {
             get { return dict; }
         }
+        #endregion
 
+        #region méthodes toString et RechDicho
+        /// <summary>
+        /// Fonction retournant une string contenant
+        /// les caractéristiques du dictionnaire et
+        /// les mots qui le composent
+        /// </summary>
+        /// <returns></returns>
         public string toString()
         {
             string res = "Ce dictionnaire " + this.lang + " contient " + this.length + " mots : "; 
@@ -78,7 +87,6 @@ namespace Boogle_Thomas_Pautras
         public bool RechDichoRecursif(int start, int end, string wordToFind)
         {
             int a = (start + end) / 2;
-
 
             string find = this.dict[a];
 
@@ -112,5 +120,6 @@ namespace Boogle_Thomas_Pautras
                 return true;
             }
         }
+        #endregion
     }
 }

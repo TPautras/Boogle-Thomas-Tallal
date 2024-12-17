@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boogle Thomas Pautras", "Boogle Thomas Pautras.csproj", "{3A4FFF02-2BB4-488E-80D5-BEA33D8A2136}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boogle_Test", "..\Boogle_Test\Boogle_Test.csproj", "{693E3FD8-3AFC-4D17-8BD8-FB7FB1F07531}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +17,10 @@ Global
 		{3A4FFF02-2BB4-488E-80D5-BEA33D8A2136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A4FFF02-2BB4-488E-80D5-BEA33D8A2136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A4FFF02-2BB4-488E-80D5-BEA33D8A2136}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDC70D0D-B19F-44B7-B192-C2863684B0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDC70D0D-B19F-44B7-B192-C2863684B0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDC70D0D-B19F-44B7-B192-C2863684B0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDC70D0D-B19F-44B7-B192-C2863684B0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693E3FD8-3AFC-4D17-8BD8-FB7FB1F07531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693E3FD8-3AFC-4D17-8BD8-FB7FB1F07531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693E3FD8-3AFC-4D17-8BD8-FB7FB1F07531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693E3FD8-3AFC-4D17-8BD8-FB7FB1F07531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

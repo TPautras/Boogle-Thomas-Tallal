@@ -96,7 +96,7 @@ namespace Boogle_Thomas_Pautras
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
-            foreach (var ligne in File.ReadLines("../../assets/Lettres.txt"))
+            foreach (var ligne in File.ReadLines("../../../Boogle-Thomas-Tallal/assets/Lettres.txt"))
             {
                 var parties = ligne.Split(';');
                 if (parties.Length == 3)

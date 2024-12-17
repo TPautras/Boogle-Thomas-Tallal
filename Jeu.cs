@@ -116,6 +116,7 @@ namespace Boogle_Thomas_Pautras
 
         #endregion
 
+        #region Gestion de la partie
         public void LancerPartie(Jeu jeu)
         {
             string choix = Console.ReadLine();
@@ -180,10 +181,6 @@ namespace Boogle_Thomas_Pautras
 
             Console.Clear();
             Console.WriteLine("La partie est terminée. Voici les scores finaux :");
-            foreach (var joueur in Joueurs)
-            {
-                Console.WriteLine($"{joueur.Name} : {joueur.Score} points");
-            }
             Dictionary<string, int> wordsNuage = new Dictionary<string, int>();
             NuageMots nuage = new NuageMots(wordsNuage);
             foreach (var joueur in Joueurs)
@@ -204,5 +201,6 @@ namespace Boogle_Thomas_Pautras
 
             nuage.GenererNuage();
         }
+        #endregion
     }
 }
