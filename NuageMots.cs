@@ -68,7 +68,7 @@ public class NuageMots
                     ));
                 }
             }
-            string cheminSortie = "assets/nuage_mots.png";
+            string cheminSortie = "../../assets/nuage_mots.png";
 
             try
             {

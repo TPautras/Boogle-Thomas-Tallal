@@ -134,8 +134,9 @@ namespace Boogle_Thomas_Pautras
                         if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot) && PlateauActuel.surPlateau(mot))
                         {
                             joueur.Add_Mot(mot);
-                            joueur.Score += mot.Length;
-                            Console.WriteLine($"Mot accepté : {mot} (+{mot.Length} points)");
+                            int point = PlateauActuel.calculerPoints(mot) + mot.Length*1.5;
+                            joueur.Score += point;
+                            Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
                         }
                         else
                         {
@@ -148,11 +149,31 @@ namespace Boogle_Thomas_Pautras
                 }
             }
 
+            Console.Clear();
             Console.WriteLine("La partie est terminée. Voici les scores finaux :");
             foreach (var joueur in Joueurs)
             {
                 Console.WriteLine($"{joueur.Name} : {joueur.Score} points");
             }
+            Dictionary<string, int> wordsNuage = new Dictionary<string, int>();
+            NuageMots nuage = new NuageMots(wordsNuage);
+            foreach (var joueur in Joueurs)
+            {
+                Console.WriteLine($"{joueur.Name} : {joueur.Score} points");
+                foreach (var word in joueur.Words)
+                {
+                    if (!wordsNuage.ContainsKey(word))
+                    {
+                        wordsNuage[word] = 1;
+                    }
+                    else
+                    {
+                        wordsNuage[word]++;
+                    }
+                }
+            }
+
+            nuage.GenererNuage();
         }
     }
 }

@@ -23,12 +23,13 @@ namespace Boogle_Thomas_Pautras
             int nbTours = int.Parse(Console.ReadLine());
 
             var dictionnaire = new Dictionnaire(
-                "FR"
+                "EN"
             );
 
             var plateau = new Plateau(4);
 
             var jeu = new Jeu(joueurs, plateau, dictionnaire, nbTours);
+            Console.Clear();
 
             Jeu.AfficherBanniere();
             jeu.AfficherMenu();

@@ -111,6 +111,24 @@ namespace Boogle_Thomas_Pautras
             return dictionnaire;
         }
 
+        public int calculerPoints(string mot)
+        {
+            int res = 0;
+            foreach(char c in mot)
+            {
+                foreach(var kvp in this.DicoLettre)
+                {
+                    if(kvp.Key == c)
+                    {
+                        res += kvp.Value.Item1;
+                        Console.WriteLine(kvp.Value.Item2);
+                    }
+                }
+            }
+            Console.WriteLine(res);
+            return res;
+        }
+
         public char[] ChoixLettres(int nombreLettres)
         {
             var lettresChoisies = new char[nombreLettres];
