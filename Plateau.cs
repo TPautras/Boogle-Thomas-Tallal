@@ -121,11 +121,9 @@ namespace Boogle_Thomas_Pautras
                     if(kvp.Key == c)
                     {
                         res += kvp.Value.Item1;
-                        Console.WriteLine(kvp.Value.Item2);
                     }
                 }
             }
-            Console.WriteLine(res);
             return res;
         }
 

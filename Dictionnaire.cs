@@ -19,7 +19,8 @@ namespace Boogle_Thomas_Pautras
         {
             this.lang = lang;
             this.dict = new List<string>();
-            var lines = File.ReadLines("../../assets/MotsPossibles"+this.lang+".txt");
+            string path = "../../assets/MotsPossibles" + this.lang + ".txt";
+            var lines = File.ReadLines(path);
             foreach (var line in lines)
             {
                 var words = line.Split(' ');

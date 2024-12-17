@@ -9,22 +9,13 @@ namespace Boogle_Thomas_Pautras
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Entrez le nombre de joueurs : ");
-            int nbJoueurs = int.Parse(Console.ReadLine());
-            var joueurs = new List<Joueur>();
-            for (int i = 1; i <= nbJoueurs; i++)
-            {
-                Console.Write($"Nom du joueur {i} : ");
-                string nom = Console.ReadLine();
-                joueurs.Add(new Joueur(nom));
-            }
+            List<Joueur> joueurs = Jeu.selectJoueurs();
 
-            Console.WriteLine("Entrez le nombre de tours : ");
-            int nbTours = int.Parse(Console.ReadLine());
+            int nbTours = Jeu.selectTours();
 
-            var dictionnaire = new Dictionnaire(
-                "EN"
-            );
+            string lang = Jeu.selectLang();
+
+            var dictionnaire = new Dictionnaire(lang);
 
             var plateau = new Plateau(4);
 

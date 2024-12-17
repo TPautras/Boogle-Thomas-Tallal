@@ -25,6 +25,35 @@ namespace Boogle_Thomas_Pautras
         }
         #endregion
 
+        #region Méthodes initialisation
+        public static List<Joueur> selectJoueurs()
+        {
+            Console.WriteLine("Entrez le nombre de joueurs : ");
+            int nbJoueurs = int.Parse(Console.ReadLine());
+            var joueurs = new List<Joueur>();
+            for (int i = 1; i <= nbJoueurs; i++)
+            {
+                Console.Write($"Nom du joueur {i} : ");
+                string nom = Console.ReadLine();
+                joueurs.Add(new Joueur(nom));
+            }
+            return joueurs;
+        }
+
+        public static int selectTours()
+        {
+            Console.WriteLine("Entrez le nombre de tours : ");
+            int nbTours = int.Parse(Console.ReadLine());
+            return nbTours;
+        }
+        public static string selectLang() 
+        {
+            Console.WriteLine("Entrez la langue que vous voulez : (FR ou EN)");
+            string lang = Console.ReadLine();
+            return lang;
+        }
+        #endregion
+
         #region Affichages
 
         public void AfficherMenu()
@@ -134,7 +163,7 @@ namespace Boogle_Thomas_Pautras
                         if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot) && PlateauActuel.surPlateau(mot))
                         {
                             joueur.Add_Mot(mot);
-                            int point = PlateauActuel.calculerPoints(mot) + mot.Length*1.5;
+                            int point = PlateauActuel.calculerPoints(mot) + mot.Length;
                             joueur.Score += point;
                             Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
                         }
