@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using static System.Console;
 
 namespace Boogle_Thomas_Pautras
 {
@@ -33,9 +34,22 @@ namespace Boogle_Thomas_Pautras
             var joueurs = new List<Joueur>();
             for (int i = 1; i <= nbJoueurs; i++)
             {
+                string[] options = { "Oui", "Non" };
+                int choixIA = MenuSelect("Voulez vous que le joueur soit une IA ?", options);
                 Console.Write($"Nom du joueur {i} : ");
                 string nom = Console.ReadLine();
-                joueurs.Add(new Joueur(nom));
+                
+                if (choixIA == 0)
+                {
+                    string[] optsDifficulte = { "Facile", "Medium","Difficile", "IMPOSSIBLE" };
+                    int choixDiff = MenuSelect("Quelle difficulté voulez vous ?", optsDifficulte);
+                    joueurs.Add(new Joueur(nom,true));
+                }
+                else
+                {
+                    joueurs.Add(new Joueur(nom));
+
+                }
             }
             return joueurs;
         }
@@ -49,7 +63,14 @@ namespace Boogle_Thomas_Pautras
         public static string selectLang() 
         {
             Console.WriteLine("Entrez la langue que vous voulez : (FR ou EN)");
-            string lang = Console.ReadLine();
+            string[] opts = { "Français", "Englais" };
+            string lang = "";
+            switch(MenuSelect("Entrez la langue que vous voulez :", opts))
+            {
+                case 0 : lang = "FR"; break;
+                case 1: lang = "EN"; break;
+                default: lang = "FR"; break;
+            }
             return lang;
         }
         #endregion
@@ -112,6 +133,57 @@ namespace Boogle_Thomas_Pautras
             Console.WriteLine("======================================================");
             Console.WriteLine("         Bienvenue dans le jeu de Boogle !          ");
             Console.WriteLine("======================================================\n");
+        }
+
+        public static int MenuSelect(string prompt, string[] options)
+        {
+            ConsoleKey keyPressed;
+            int res = 0;
+            do
+            {
+                Clear();
+                DisplayOptions(prompt, options, res);
+                ConsoleKeyInfo keyInfo = ReadKey(true);
+                keyPressed = keyInfo.Key;
+                if(keyPressed == ConsoleKey.UpArrow)
+                {
+                    res--;
+                    if(res == -1)
+                    {
+                        res = options.Length - 1;
+                    }
+                }
+                else if (keyPressed == ConsoleKey.DownArrow)
+                {
+                    res++;
+                    if (res == options.Length)
+                    {
+                        res = 0;
+                    }
+                }
+            } while (keyPressed != ConsoleKey.Enter);
+            return res;
+        }
+
+        public static void DisplayOptions(string prompt, string[] options, int selectedOption)
+        {
+            Console.WriteLine(prompt);
+            for(int i = 0; i < options.Length; i++)
+            {
+                if(i == selectedOption)
+                {
+                    ForegroundColor = ConsoleColor.Black;
+                    BackgroundColor = ConsoleColor.White;
+                    Console.WriteLine($">> {options[i]}");
+                }
+                else
+                {
+                    ForegroundColor = ConsoleColor.White;
+                    BackgroundColor = ConsoleColor.Black;
+                    Console.WriteLine($"   {options[i]}");
+                }
+            }
+            ResetColor();
         }
 
         #endregion

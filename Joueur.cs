@@ -12,7 +12,8 @@ namespace Boogle_Thomas_Pautras
         #region Attributs, propriétés et Constructeur
         private string name;
         private int score;
-        private string[] words = new string[0]; 
+        private string[] words = new string[0];
+        private bool isAi = false;
 
         /// <summary>
         /// Constructeur du Joueur, celui-ci
@@ -23,6 +24,19 @@ namespace Boogle_Thomas_Pautras
         /// <param name="name"> nom du joueur</param>
         public Joueur(string name) {
             this.name = name;
+        }
+
+        /// <summary>
+        /// Constructeur du Joueur pour l'IA, celui-ci
+        /// a besoind'un nom et d'un bool qui sera true pour être créé
+        /// tous les autres attributs seront initialisés
+        /// plus tard dans l'exécution du programme
+        /// </summary>
+        /// <param name="name"> nom du joueur</param>
+        public Joueur(string name, bool isAi)
+        {
+            this.name = name;
+            this.isAi = isAi;
         }
 
         /// <summary>
