@@ -13,10 +13,21 @@ namespace Boogle_Thomas_Pautras
         private int score;
         private string[] words = new string[0]; 
 
+        /// <summary>
+        /// Constructeur du Joueur, celui-ci
+        /// n'a besoin que d'un nom pour être créé
+        /// tous les autres attributs seront initialisés
+        /// plus tard dans l'exécution du programme
+        /// </summary>
+        /// <param name="name"> nom du joueur</param>
         public Joueur(string name) {
             this.name = name;
         }
 
+        /// <summary>
+        /// Propriétés pour les attributs de la
+        /// classe
+        /// </summary>
         public string Name { get { return name; } }
         public int Score { 
             get { return score; } 
