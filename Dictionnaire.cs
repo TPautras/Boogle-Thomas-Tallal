@@ -16,6 +16,14 @@ namespace Boogle_Thomas_Pautras
         private string lang = "FR";
         private Dictionary<int, List<string>> dictionarySorted = new Dictionary<int, List<string>>();
 
+        /// <summary>
+        /// Constructeur d'un dictionnaire, se crée en fontion
+        /// de la langue passée en entrée qui va chercher un ficher 
+        /// dans assets contenant une liste de mots.
+        /// Puis automatiquement trier le dictionnaire et rassembler
+        /// par taille les mots.
+        /// </summary>
+        /// <param name="lang">Langue du dictionnaire</param>
         public Dictionnaire(string lang)
         {
             this.lang = lang;
@@ -34,7 +42,8 @@ namespace Boogle_Thomas_Pautras
                 }
             }
             this.length = dict.Count;
-            dict.Sort();
+            dict.Sort(); //Fonction par défaut sur les Listes dans c#, complexité par défaut de 
+                         //O(nlogn) mais est de O(n²) dans le pire des cas
             foreach (string mot in dict)
             {
                 int longueur = mot.Length;
@@ -46,7 +55,7 @@ namespace Boogle_Thomas_Pautras
             }
             foreach (var key in dictionarySorted.Keys)
             {
-                dictionarySorted[key].Sort();
+                dictionarySorted[key].Sort(); //Applique de nouveau la fonction sur chacune des sous listes
             }
         }
 
@@ -72,7 +81,7 @@ namespace Boogle_Thomas_Pautras
         /// les caractéristiques du dictionnaire et
         /// les mots qui le composent
         /// </summary>
-        /// <returns></returns>
+        /// <returns name="res" type="string"></returns>
         public string toString()
         {
             string res = "Ce dictionnaire " + this.lang + " contient " + this.length + " mots : "; 
@@ -84,6 +93,15 @@ namespace Boogle_Thomas_Pautras
             return res;
         }
 
+        /// <summary>
+        /// Fonction de recherche dichotomique dans le dictionnaire
+        /// retourne un booléen représentant la présence ou non du
+        /// mot. 
+        /// </summary>
+        /// <param name="start">borne inférieure de la recherche</param>
+        /// <param name="end">borne supérieure de la recherche</param>
+        /// <param name="wordToFind">Mot dont on doit déterminer la présence</param>
+        /// <returns type="bool">true si présent dans le dictionnaire, faux sinon</returns>
         public bool RechDichoRecursif(int start, int end, string wordToFind)
         {
             int a = (start + end) / 2;
