@@ -280,8 +280,8 @@ namespace Boogle_Thomas_Pautras
                 case 0: scoreMax = 10; break;
                 case 1: scoreMax = 20; break;
                 case 2: scoreMax = 40; break;
-                case 3: scoreMax = 10000; break;
-                default: scoreMax = 1; break;
+                case 3: scoreMax = 200; break;
+                default: scoreMax = 200; break;
 
             }
             List<string> resultat = new List<string>();

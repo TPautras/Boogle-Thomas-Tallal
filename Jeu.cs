@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using static System.Console;
+using System.Threading;
 
 namespace Boogle_Thomas_Pautras
 {
@@ -50,7 +51,7 @@ namespace Boogle_Thomas_Pautras
             for (int i = 1; i <= nbJoueurs; i++)
             {
                 string[] options = { "Oui", "Non" };
-                int choixIA = MenuSelect("Voulez vous que le joueur soit une IA ?", options);
+                int choixIA = MenuSelect("Voulez vous que le joueur soit une IA ? (Appuyez sur les flèches puis sur entrée pour valider)", options);
                 Console.Write($"Nom du joueur {i} : ");
                 string nom = Console.ReadLine();
                 
@@ -98,7 +99,7 @@ namespace Boogle_Thomas_Pautras
         public static string selectLang() 
         {
             Console.WriteLine("Entrez la langue que vous voulez : (FR ou EN)");
-            string[] opts = { "Français", "Englais" };
+            string[] opts = { "Français", "Anglais" };
             string lang = "";
             switch(MenuSelect("Entrez la langue que vous voulez :", opts))
             {
@@ -114,8 +115,8 @@ namespace Boogle_Thomas_Pautras
 
         public string AfficherMenu()
         {
-            string res = "Choisissez une option :  \n" +
-                         "============================ \n";
+            string res = "\n" +
+                         "Choisissez une option :  \n";
             return res;
                          
         }
@@ -277,6 +278,9 @@ namespace Boogle_Thomas_Pautras
                     {
                         Console.WriteLine();
                         Console.WriteLine($"C'est le tour de {joueur.Name} !");
+                        Console.WriteLine();
+
+                        Console.WriteLine(this.PlateauActuel.ToString());
 
                         List<string> motsIA = PlateauActuel.AIList(joueur.Difficulte, DictionnaireActuel.DictionarySorted, joueur);
 
@@ -287,6 +291,7 @@ namespace Boogle_Thomas_Pautras
                             int point = PlateauActuel.calculerPoints(mot) + mot.Length;
                             joueur.Score += point;
                             Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
+                            Thread.Sleep(1500);
 
                             mots += mot + " ";
                         }
@@ -355,8 +360,6 @@ namespace Boogle_Thomas_Pautras
             }
 
             nuage.GenererNuage();
-            Console.WriteLine(this.PlateauActuel.ToString());
-            Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Appuyez sur n'importe quelle touche pour continuer ...");
             Console.ReadKey();
