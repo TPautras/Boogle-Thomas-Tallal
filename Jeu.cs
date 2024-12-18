@@ -41,9 +41,9 @@ namespace Boogle_Thomas_Pautras
                 
                 if (choixIA == 0)
                 {
-                    string[] optsDifficulte = { "Facile", "Medium","Difficile", "IMPOSSIBLE" };
+                    string[] optsDifficulte = { "Facile", "Medium","Difficile", "IMPOSSIBLE!!!" };
                     int choixDiff = MenuSelect("Quelle difficulté voulez vous ?", optsDifficulte);
-                    joueurs.Add(new Joueur(nom,true));
+                    joueurs.Add(new Joueur(nom,true, choixDiff));
                 }
                 else
                 {
@@ -131,7 +131,7 @@ namespace Boogle_Thomas_Pautras
             Console.WriteLine("                             Y8b d88P               ");
             Console.WriteLine("                              \"Y88P\"                ");
             Console.WriteLine("======================================================");
-            Console.WriteLine("         Bienvenue dans le jeu de Boogle !          ");
+            Console.WriteLine("         Bienvenue dans le jeu du Boogle !          ");
             Console.WriteLine("======================================================\n");
         }
 
@@ -219,35 +219,57 @@ namespace Boogle_Thomas_Pautras
                 Console.WriteLine($"Début du tour {tour}/{nbTours}.");
                 foreach (var joueur in Joueurs)
                 {
-                    Console.WriteLine($"C'est le tour de {joueur.Name} !");
-                    Stopwatch chrono = Stopwatch.StartNew();
-
-                    while (chrono.Elapsed.TotalMinutes < 3)
+                    if (joueur.IsAi)
                     {
-                        TimeSpan restant = TimeSpan.FromMinutes(3) - chrono.Elapsed;
-                        Console.WriteLine(this.PlateauActuel.ToString());
                         Console.WriteLine();
-                        Console.WriteLine($"Temps restant : {restant.Minutes:D2}:{restant.Seconds:D2}");
-                        Console.WriteLine("Entrez un mot ou appuyez sur Entrée pour terminer : ");
-                        string mot = Console.ReadLine();
+                        Console.WriteLine($"C'est le tour de {joueur.Name} !");
 
-                        if (string.IsNullOrEmpty(mot)) break;
+                        List<string> motsIA = PlateauActuel.AIList(joueur.Difficulte, DictionnaireActuel.DictionarySorted);
 
-                        if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot) && PlateauActuel.surPlateau(mot))
+                        string mots = "";
+                        foreach (string mot in motsIA)
                         {
                             joueur.Add_Mot(mot);
                             int point = PlateauActuel.calculerPoints(mot) + mot.Length;
                             joueur.Score += point;
-                            Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Mot invalide ou déjà trouvé.");
-                        }
-                    }
 
-                    chrono.Stop();
-                    Console.WriteLine($"Temps écoulé pour {joueur.Name}.");
+                            mots += mot + " ";
+                        }
+                        Console.WriteLine("L'IA a trouvé les mots suivants : "+mots);                        
+                        Console.WriteLine("Pour un total de : " + joueur.Score);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"C'est le tour de {joueur.Name} !");
+                        Stopwatch chrono = Stopwatch.StartNew();
+
+                        while (chrono.Elapsed.TotalMinutes < 3)
+                        {
+                            TimeSpan restant = TimeSpan.FromMinutes(3) - chrono.Elapsed;
+                            Console.WriteLine(this.PlateauActuel.ToString());
+                            Console.WriteLine();
+                            Console.WriteLine($"Temps restant : {restant.Minutes:D2}:{restant.Seconds:D2}");
+                            Console.WriteLine("Entrez un mot ou appuyez sur Entrée pour terminer : ");
+                            string mot = Console.ReadLine();
+
+                            if (string.IsNullOrEmpty(mot)) break;
+
+                            if (mot.Length >= 2 && DictionnaireActuel.RechDichoRecursif(0, DictionnaireActuel.Dict.Count - 1, mot) && !joueur.Contain(mot) && PlateauActuel.surPlateau(mot))
+                            {
+                                joueur.Add_Mot(mot);
+                                int point = PlateauActuel.calculerPoints(mot) + mot.Length;
+                                joueur.Score += point;
+                                Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Mot invalide ou déjà trouvé.");
+                            }
+                        }
+
+                        chrono.Stop();
+                        Console.WriteLine($"Temps écoulé pour {joueur.Name}.");
+                    }
                 }
             }
 

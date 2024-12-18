@@ -14,6 +14,7 @@ namespace Boogle_Thomas_Pautras
         private int score;
         private string[] words = new string[0];
         private bool isAi = false;
+        private int difficulte = 0;
 
         /// <summary>
         /// Constructeur du Joueur, celui-ci
@@ -28,15 +29,17 @@ namespace Boogle_Thomas_Pautras
 
         /// <summary>
         /// Constructeur du Joueur pour l'IA, celui-ci
-        /// a besoind'un nom et d'un bool qui sera true pour être créé
-        /// tous les autres attributs seront initialisés
+        /// a besoind'un nom, d'un bool qui sera true pour être créé
+        /// et une difficulté,tous les autres
+        /// attributs seront initialisés
         /// plus tard dans l'exécution du programme
         /// </summary>
         /// <param name="name"> nom du joueur</param>
-        public Joueur(string name, bool isAi)
+        public Joueur(string name, bool isAi, int difficulte)
         {
             this.name = name;
             this.isAi = isAi;
+            this.difficulte = difficulte;
         }
 
         /// <summary>
@@ -44,6 +47,8 @@ namespace Boogle_Thomas_Pautras
         /// classe
         /// </summary>
         public string Name { get { return name; } }
+        public bool IsAi { get { return isAi; } }
+        public int Difficulte { get { return difficulte; } }
         public int Score { 
             get { return score; } 
             set { score = value; }

@@ -73,6 +73,11 @@ namespace Boogle_Thomas_Pautras
         {
             get { return dict; }
         }
+
+        public Dictionary<int, List<string>> DictionarySorted
+        {
+            get { return dictionarySorted; }
+        }
         #endregion
 
         #region méthodes toString et RechDicho

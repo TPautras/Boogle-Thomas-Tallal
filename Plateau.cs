@@ -257,5 +257,50 @@ namespace Boogle_Thomas_Pautras
             return res;
         }
         #endregion
+
+        public List<string> AIList(int difficulté, Dictionary<int, List<string>> monDico)
+        {
+            int scoreMax;
+            switch(difficulté)
+            {
+                case 0: scoreMax = 10; break;
+                case 1: scoreMax = 20; break;
+                case 2: scoreMax = 40; break;
+                case 3: scoreMax = 10000; break;
+                default: scoreMax = 1; break;
+
+            }
+            List<string> resultat = new List<string>();
+            int totalPoints = 0;
+
+            List<int> clesTriees = new List<int>(monDico.Keys);
+            clesTriees.Sort();
+
+            foreach (int cle in clesTriees)
+            {
+                List<string> mots = monDico[cle];
+
+                foreach (string mot in mots)
+                {
+                    if(mot.Length > 0)
+                    {
+                        if (this.surPlateau(mot))
+                        {
+                            int points = this.calculerPoints(mot);
+                            if (totalPoints + points <= scoreMax)
+                            {
+                                resultat.Add(mot);
+                                totalPoints += points;
+                            }
+                            else
+                            {
+                                return resultat;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
