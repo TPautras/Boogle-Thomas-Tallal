@@ -77,15 +77,12 @@ namespace Boogle_Thomas_Pautras
 
         #region Affichages
 
-        public void AfficherMenu()
+        public string AfficherMenu()
         {
-            Console.WriteLine("Bienvenue dans le jeu de Boogle !");
-            Console.WriteLine("============================");
-            Console.WriteLine("1. Commencer une nouvelle partie");
-            Console.WriteLine("2. Voir les règles du jeu");
-            Console.WriteLine("3. Quitter");
-            Console.WriteLine("============================");
-            Console.Write("Choisissez une option : ");
+            string res = "Choisissez une option :  \n" +
+                         "============================ \n";
+            return res;
+                         
         }
 
         public void AfficherRegles()
@@ -116,23 +113,25 @@ namespace Boogle_Thomas_Pautras
             }
         }
 
-        public static void AfficherBanniere()
+        public string AfficherBanniere()
         {
-            Console.WriteLine("======================================================");
-            Console.WriteLine("888888b.                              888             ");
-            Console.WriteLine("888  \"88b                             888              ");
-            Console.WriteLine("888  .88P                             888              ");
-            Console.WriteLine("8888888K.   .d88b.   .d88b.   .d88b.  888  .d88b.     ");
-            Console.WriteLine("888  \"Y88b d88\"\"88b d88\"\"88b d88P\"88b 888 d8P Y8b    ");
-            Console.WriteLine("888    888 888  888 888  888 888  888 888 88888888   ");
-            Console.WriteLine("888   d88P Y88..88P Y88..88P Y88b 888 888 Y8b.       ");
-            Console.WriteLine("8888888P\"   \"Y88P\"   \"Y88P\"   \"Y88888 888  \"Y8888   ");
-            Console.WriteLine("                                  888               ");
-            Console.WriteLine("                             Y8b d88P               ");
-            Console.WriteLine("                              \"Y88P\"                ");
-            Console.WriteLine("======================================================");
-            Console.WriteLine("         Bienvenue dans le jeu du Boogle !          ");
-            Console.WriteLine("======================================================\n");
+            string res = "======================================================\n" +
+                         "888888b.                              888             \n" +
+                         "888  \"88b                             888              \n" +
+                         "888  .88P                             888              \n" +
+                         "8888888K.   .d88b.   .d88b.   .d88b.  888  .d88b.     \n" +
+                         "888  \"Y88b d88\"\"88b d88\"\"88b d88P\"88b 888 d8P Y8b    \n" +
+                         "888    888 888  888 888  888 888  888 888 88888888  \n" +
+                         "888   d88P Y88..88P Y88..88P Y88b 888 888 Y8b.       \n" +
+                         "8888888P\"   \"Y88P\"   \"Y88P\"   \"Y88888 888  \"Y8888   \n" +
+                         "                                  888               \n" +
+                         "                             Y8b d88P               \n" +
+                         "                              \"Y88P\"                \n" +
+                         "======================================================\n" +
+                         "         Bienvenue dans le jeu du Boogle !          \n" +
+                         "======================================================\n";
+
+            return res;
         }
 
         public static int MenuSelect(string prompt, string[] options)
@@ -191,24 +190,30 @@ namespace Boogle_Thomas_Pautras
         #region Gestion de la partie
         public void LancerPartie(Jeu jeu)
         {
-            string choix = Console.ReadLine();
-            while (choix != "3")
+            string completeMenu = this.AfficherBanniere() + this.AfficherMenu();
+            string[] menuOptions = { "Lancer une partie", "Afficher les règles", "Quitter" };
+            int choix = MenuSelect(completeMenu,menuOptions);
+            while (choix != 2)
             {
                 switch (choix)
                 {
-                    case "1":
+                    case 0:
                         jeu.LancerTour();
                         break;
-                    case "2":
+                    case 1:
                         jeu.AfficherRegles();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Appuyez sur n'importe quelle touche pour continuer ...");
+                        Console.ReadKey();
                         break;
+                    case 2: break;
                     default:
                         Console.WriteLine("Choix invalide. Veuillez réessayer.");
                         break;
                 }
 
-                jeu.AfficherMenu();
-                choix = Console.ReadLine();
+                choix = MenuSelect(completeMenu, menuOptions);
             }
         }
         public void LancerTour()
@@ -251,6 +256,7 @@ namespace Boogle_Thomas_Pautras
                             Console.WriteLine($"Temps restant : {restant.Minutes:D2}:{restant.Seconds:D2}");
                             Console.WriteLine("Entrez un mot ou appuyez sur Entrée pour terminer : ");
                             string mot = Console.ReadLine();
+                            mot = mot.ToUpper();
 
                             if (string.IsNullOrEmpty(mot)) break;
 
@@ -294,6 +300,11 @@ namespace Boogle_Thomas_Pautras
             }
 
             nuage.GenererNuage();
+            Console.WriteLine(this.PlateauActuel.ToString());
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Appuyez sur n'importe quelle touche pour continuer ...");
+            Console.ReadKey();
         }
         #endregion
     }

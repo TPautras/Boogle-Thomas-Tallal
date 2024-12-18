@@ -22,9 +22,6 @@ namespace Boogle_Thomas_Pautras
             var jeu = new Jeu(joueurs, plateau, dictionnaire, nbTours);
             Console.Clear();
 
-            Jeu.AfficherBanniere();
-            jeu.AfficherMenu();
-
             jeu.LancerPartie(jeu);
 
             Console.WriteLine("Merci d'avoir joué à Boogle !");
