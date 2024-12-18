@@ -115,7 +115,8 @@ namespace Boogle_Thomas_Pautras
                 bool oob2 = (i + coordonneeslongueur[k]) > 0 || (i + coordonneeslongueur[k]) < n || (j + coordonneeslargeur[k]) > 0 || (j + coordonneeslargeur[k]) < n;
                 if (oob2)
                 {
-                    if (motPossible(i + coordonneeslongueur[k], j + coordonneeslargeur[k], counter + 1, mot, tested))
+                    bool nextCase = motPossible(i + coordonneeslongueur[k], j + coordonneeslargeur[k], counter + 1, mot, tested);
+                    if (nextCase)
                     {
                         return true;
                     }

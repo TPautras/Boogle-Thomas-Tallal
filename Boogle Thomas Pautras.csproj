@@ -45,6 +45,7 @@
     <Compile Include="NuageMots.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Plateau.cs" />
+    <Compile Include="SortRace.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\Lettres.txt" />

@@ -45,20 +45,25 @@ namespace Boogle_Thomas_Pautras
         /// <returns type= List<Joueur>>Liste des utilisateurs</returns>
         public static List<Joueur> selectJoueurs()
         {
-            Console.WriteLine("Entrez le nombre de joueurs : ");
+            Console.WriteLine("Entrez le nombre de joueurs : (Il doit être supérieur ou égal à 2)");
             int nbJoueurs = int.Parse(Console.ReadLine());
+            while(nbJoueurs < 2)
+            {
+                Console.WriteLine("Entrez le nombre de joueurs : (Il doit être supérieur ou égal à 2)");
+                nbJoueurs = int.Parse(Console.ReadLine());
+            }
             var joueurs = new List<Joueur>();
             for (int i = 1; i <= nbJoueurs; i++)
             {
                 string[] options = { "Oui", "Non" };
-                int choixIA = MenuSelect("Voulez vous que le joueur soit une IA ? (Appuyez sur les flèches puis sur entrée pour valider)", options);
+                int choixIA = MenuSelect(AfficherBanniere() + "Voulez vous que le joueur soit une IA ? (Appuyez sur les flèches puis sur entrée pour valider)", options);
                 Console.Write($"Nom du joueur {i} : ");
                 string nom = Console.ReadLine();
                 
                 if (choixIA == 0)
                 {
                     string[] optsDifficulte = { "Facile", "Medium","Difficile", "IMPOSSIBLE!!!" };
-                    int choixDiff = MenuSelect("Quelle difficulté voulez vous ?", optsDifficulte);
+                    int choixDiff = MenuSelect(AfficherBanniere() + "Quelle difficulté voulez vous ?", optsDifficulte);
                     joueurs.Add(new Joueur(nom,true, choixDiff));
                 }
                 else
@@ -101,7 +106,7 @@ namespace Boogle_Thomas_Pautras
             Console.WriteLine("Entrez la langue que vous voulez : (FR ou EN)");
             string[] opts = { "Français", "Anglais" };
             string lang = "";
-            switch(MenuSelect("Entrez la langue que vous voulez :", opts))
+            switch(MenuSelect(AfficherBanniere() + "Entrez la langue que vous voulez :", opts))
             {
                 case 0 : lang = "FR"; break;
                 case 1: lang = "EN"; break;
