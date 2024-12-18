@@ -149,7 +149,7 @@ namespace Boogle_Thomas_Pautras
             }
         }
 
-        public string AfficherBanniere()
+        public static string AfficherBanniere()
         {
             string res = "======================================================\n" +
                          "888888b.                              888             \n" +
@@ -233,7 +233,7 @@ namespace Boogle_Thomas_Pautras
         /// <param name="jeu">Instance de la partie en cours pour pouvoir utiliser des méthodes d'instance</param>
         public void LancerBoogle(Jeu jeu)
         {
-            string completeMenu = this.AfficherBanniere() + this.AfficherMenu();
+            string completeMenu = Jeu.AfficherBanniere() + this.AfficherMenu();
             string[] menuOptions = { "Lancer une partie", "Afficher les règles", "Quitter" };
             int choix = MenuSelect(completeMenu,menuOptions);
             while (choix != 2)

@@ -14,7 +14,7 @@ namespace Boogle_Thomas_Pautras
         private De[,] des;
         private Random r = new Random();
         private Dictionary<char, (int, int)> DicoLettre;
-        private char[,] plateauActuel; //Ne stocke que les char et non des instances de De
+        private char[,] plateauActuel; 
 
         /// <summary>
         /// Constructeur non naturel du plateau,
@@ -28,19 +28,17 @@ namespace Boogle_Thomas_Pautras
             this.n = n;
             this.des = new De[n, n];
 
-            // Initialisation du dictionnaire de lettres
             this.DicoLettre = CréationDicoLettres();
             this.plateauActuel = new char[n,n];
 
-            // Création des dés
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
                     char[] lettres = ChoixLettres(6);
                     this.des[i, j] = new De(lettres);
-                    this.des[i, j].Lance(this.r); //Permet "d'initialiser" la face visible du dé de ce tableau
-                    this.plateauActuel[i, j] = this.des[i, j].FinalLetter; //Update l'autre tableau ne contenant que les char et non les instances de Dé
+                    this.des[i, j].Lance(this.r); 
+                    this.plateauActuel[i, j] = this.des[i, j].FinalLetter; 
                 }
             }
         }
@@ -142,7 +140,17 @@ namespace Boogle_Thomas_Pautras
         public Dictionary<char, (int, int)> CréationDicoLettres()
         {
             Dictionary<char, (int, int)> dictionnaire = new Dictionary<char, (int, int)>();
-            foreach (var ligne in File.ReadLines("../../../Boogle-Thomas-Tallal/assets/Lettres.txt"))
+            string path = "../../../Boogle-Thomas-Tallal/assets/Lettres.txt";
+            IEnumerable<string> lines = null;
+            try
+            {
+                lines = File.ReadLines(path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            foreach (var ligne in lines)
             {
                 var parties = ligne.Split(';');
                 if (parties.Length == 3)
@@ -204,17 +212,14 @@ namespace Boogle_Thomas_Pautras
                 double cumulativeSom = 0;
                 optionsAvecCumul.Clear();
 
-                // On utilise le dictionnaire DicoLettre pour générer des lettres pondérées.
                 foreach (var kvp in this.DicoLettre)
                 {
-                    // On suppose que kvp.Value.Item2 représente le poids de la lettre.
                     cumulativeSom += kvp.Value.Item2;
                     optionsAvecCumul.Add((kvp.Key.ToString(), cumulativeSom));
                 }
 
                 double randomValue = r.NextDouble() * cumulativeSom;
 
-                // Recherche de la lettre correspondante
                 foreach (var (Option, Cumul) in optionsAvecCumul)
                 {
                     if (randomValue <= Cumul)

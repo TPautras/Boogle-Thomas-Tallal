@@ -29,7 +29,15 @@ namespace Boogle_Thomas_Pautras
             this.lang = lang;
             this.dict = new List<string>();
             string path = "../../../Boogle-Thomas-Tallal/assets/MotsPossibles" + this.lang + ".txt";
-            var lines = File.ReadLines(path);
+            IEnumerable<string> lines = null;
+            try
+            {
+                lines = File.ReadLines(path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             foreach (var line in lines)
             {
                 var words = line.Split(' ');
@@ -42,8 +50,7 @@ namespace Boogle_Thomas_Pautras
                 }
             }
             this.length = dict.Count;
-            dict.Sort(); //Fonction par défaut sur les Listes dans c#, complexité par défaut de 
-                         //O(nlogn) mais est de O(n²) dans le pire des cas
+            dict.Sort();
             foreach (string mot in dict)
             {
                 int longueur = mot.Length;
@@ -55,7 +62,7 @@ namespace Boogle_Thomas_Pautras
             }
             foreach (var key in dictionarySorted.Keys)
             {
-                dictionarySorted[key].Sort(); //Applique de nouveau la fonction sur chacune des sous listes
+                dictionarySorted[key].Sort();
             }
         }
 

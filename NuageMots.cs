@@ -12,7 +12,6 @@ public class NuageMots
     private readonly int height;
     private readonly Random random;
     private readonly Dictionary<string, int> mots;
-    // Ajout d'une liste pour suivre les rectangles occupés
     private readonly List<Rectangle> rectanglesOccupes;
 
     public NuageMots(Dictionary<string, int> mots, int width = 800, int height = 600)
@@ -94,7 +93,6 @@ public class NuageMots
     /// <returns name="res">Float représentant la taille de police calculée entre 10 et 48</returns>
     private float CalculerTaillePolice(int occurrences, int min, int max)
     {
-        // Échelle de taille de police entre 10 et 48
         const float minSize = 10f;
         const float maxSize = 48f;
         if (max == min) return maxSize;
@@ -159,7 +157,6 @@ public class NuageMots
     /// <returns name="res">Bool - True si la position est libre, False si un chevauchement est détecté</returns>
     private bool EstPositionLibre(Rectangle nouveauRect)
     {
-        // Vérifier les collisions avec les rectangles existants
         foreach (Rectangle rect in rectanglesOccupes)
         {
             if (rect.IntersectsWith(nouveauRect))

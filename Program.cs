@@ -9,20 +9,21 @@ namespace Boogle_Thomas_Pautras
     {
         static void Main(string[] args)
         {
-            List<Joueur> joueurs = Jeu.selectJoueurs(); //Crée la liste des utilisateurs et détermine si ce sont des IA
+            Console.WriteLine(Jeu.AfficherBanniere());
+            List<Joueur> joueurs = Jeu.selectJoueurs(); 
 
-            int nbTours = Jeu.selectTours(); //Détermine le nombre de tours voulus par l'utilisateur
+            int nbTours = Jeu.selectTours(); 
 
-            string lang = Jeu.selectLang(); //Détermine la langue de la partie
+            string lang = Jeu.selectLang(); 
 
-            var dictionnaire = new Dictionnaire(lang); //Initialise le dictionnaire en fonction de la langue
+            var dictionnaire = new Dictionnaire(lang); 
 
-            var plateau = new Plateau(4); //Inistialise le plateau avec une valeur par défaut de 4
+            var plateau = new Plateau(4);
 
-            var jeu = new Jeu(joueurs, plateau, dictionnaire, nbTours); //Initialise le Jeu avec les valeurs déterminées juste avant
+            var jeu = new Jeu(joueurs, plateau, dictionnaire, nbTours); 
             Console.Clear();
 
-            jeu.LancerBoogle(jeu); // Lance la partie de BOOGLE !!
+            jeu.LancerBoogle(jeu); 
 
             Console.WriteLine("Merci d'avoir joué à Boogle !");
         }
