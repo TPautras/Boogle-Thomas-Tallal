@@ -229,7 +229,7 @@ namespace Boogle_Thomas_Pautras
                         Console.WriteLine();
                         Console.WriteLine($"C'est le tour de {joueur.Name} !");
 
-                        List<string> motsIA = PlateauActuel.AIList(joueur.Difficulte, DictionnaireActuel.DictionarySorted);
+                        List<string> motsIA = PlateauActuel.AIList(joueur.Difficulte, DictionnaireActuel.DictionarySorted, joueur);
 
                         string mots = "";
                         foreach (string mot in motsIA)
@@ -237,11 +237,17 @@ namespace Boogle_Thomas_Pautras
                             joueur.Add_Mot(mot);
                             int point = PlateauActuel.calculerPoints(mot) + mot.Length;
                             joueur.Score += point;
+                            Console.WriteLine($"Mot accepté : {mot} (+{point} points)");
 
                             mots += mot + " ";
                         }
                         Console.WriteLine("L'IA a trouvé les mots suivants : "+mots);                        
                         Console.WriteLine("Pour un total de : " + joueur.Score);
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Appuyez sur n'importe quelle touche pour continuer ...");
+                        Console.ReadKey();
+
                     }
                     else
                     {

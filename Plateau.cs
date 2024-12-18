@@ -258,7 +258,20 @@ namespace Boogle_Thomas_Pautras
         }
         #endregion
 
-        public List<string> AIList(int difficulté, Dictionary<int, List<string>> monDico)
+        /// <summary>
+        /// Fonction simulant un tour d'une IA, en 
+        /// fonction principalement de la difficulté
+        /// passée en paramètre, limite le nombre de mots 
+        /// qu'elle retourne, qui sont les mots "trouvés"
+        /// par l'IA. Fonctionne en testant les mots des 
+        /// plus petits aux plus grands en terme de taille
+        /// afin de limiter le temps d'exécution de la fonction
+        /// </summary>
+        /// <param name="difficulté">Difficulté de l'IA</param>
+        /// <param name="monDico">Dictionnaire trié par ordre alphabétique contenant les mots "légaux"</param>
+        /// <param name="IA">Instance de Joueur afin de ne pas répéter plusieurs fois les mêmes mots</param>
+        /// <returns type=List<string>>Une liste de mots qui sont ceux "joués" par l'IA</returns>
+        public List<string> AIList(int difficulté, Dictionary<int, List<string>> monDico, Joueur IA)
         {
             int scoreMax;
             switch(difficulté)
@@ -284,7 +297,7 @@ namespace Boogle_Thomas_Pautras
                 {
                     if(mot.Length > 0)
                     {
-                        if (this.surPlateau(mot))
+                        if (this.surPlateau(mot) && !(IA.Contain(mot)))
                         {
                             int points = this.calculerPoints(mot);
                             if (totalPoints + points <= scoreMax)
