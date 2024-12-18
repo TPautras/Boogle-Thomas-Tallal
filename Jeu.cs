@@ -11,6 +11,11 @@ namespace Boogle_Thomas_Pautras
     public class Jeu
     {
         #region Initialisation
+        /// <summary>
+        /// Attributs et constructeurs de la classe
+        /// Jeu, comprend toutes les autres
+        /// classes sauf De et NuageDeMots.
+        /// </summary>
         private List<Joueur> Joueurs;
         private Plateau PlateauActuel;
         private Dictionnaire DictionnaireActuel;
@@ -27,6 +32,16 @@ namespace Boogle_Thomas_Pautras
         #endregion
 
         #region Méthodes initialisation
+        /// <summary>
+        /// Méthode permettant de sélectionner
+        /// le nombre de joueur voulu par
+        /// l'utilisateur. Puis retourne une
+        /// liste contenant toutes les instances 
+        /// nécessaires.
+        /// Permet également de choisir si les joueurs sont des 
+        /// IA ou des "vrais" joueurs
+        /// </summary>
+        /// <returns type= List<Joueur>>Liste des utilisateurs</returns>
         public static List<Joueur> selectJoueurs()
         {
             Console.WriteLine("Entrez le nombre de joueurs : ");
@@ -54,12 +69,32 @@ namespace Boogle_Thomas_Pautras
             return joueurs;
         }
 
+        /// <summary>
+        /// Méthode permettant
+        /// simplement à l'utilisateur 
+        /// d'entrer le nombre de tours qu'il 
+        /// désire jouer.
+        /// </summary>
+        /// <returns type=int>Le nombre de tours entré</returns>
         public static int selectTours()
         {
-            Console.WriteLine("Entrez le nombre de tours : ");
-            int nbTours = int.Parse(Console.ReadLine());
+            int nbTours = 0;
+            while(nbTours <= 0 || nbTours == null)
+            {
+                Console.WriteLine("Entrez le nombre de tours : ");
+                nbTours = int.Parse(Console.ReadLine());
+            }
             return nbTours;
         }
+
+        /// <summary>
+        /// Méthode permettant
+        /// simplement à l'utilisateur 
+        /// de sélectionner la langue
+        /// avec laquelle il 
+        /// désire jouer.
+        /// </summary>
+        /// <returns type=string>Les deux premières lettres de la langue</returns>
         public static string selectLang() 
         {
             Console.WriteLine("Entrez la langue que vous voulez : (FR ou EN)");
@@ -188,7 +223,14 @@ namespace Boogle_Thomas_Pautras
         #endregion
 
         #region Gestion de la partie
-        public void LancerPartie(Jeu jeu)
+        /// <summary>
+        /// Méthode gérant le Boogle dans son intégralité.
+        /// Affiche les différents menus,
+        /// gère la victoire la défaite et la 
+        /// sortie du jeu.
+        /// </summary>
+        /// <param name="jeu">Instance de la partie en cours pour pouvoir utiliser des méthodes d'instance</param>
+        public void LancerBoogle(Jeu jeu)
         {
             string completeMenu = this.AfficherBanniere() + this.AfficherMenu();
             string[] menuOptions = { "Lancer une partie", "Afficher les règles", "Quitter" };
@@ -198,7 +240,7 @@ namespace Boogle_Thomas_Pautras
                 switch (choix)
                 {
                     case 0:
-                        jeu.LancerTour();
+                        jeu.LancerPartie();
                         break;
                     case 1:
                         jeu.AfficherRegles();
@@ -216,7 +258,14 @@ namespace Boogle_Thomas_Pautras
                 choix = MenuSelect(completeMenu, menuOptions);
             }
         }
-        public void LancerTour()
+
+        /// <summary>
+        /// Méthode gérant une partie de jeu
+        /// avec les différents tours et 
+        /// les différentes entrée des 
+        /// utilisateurs ou des IA
+        /// </summary>
+        public void LancerPartie()
         {
             Console.WriteLine("La partie commence ! Bonne chance à tous les joueurs.");
             for (int tour = 1; tour <= nbTours; tour++)

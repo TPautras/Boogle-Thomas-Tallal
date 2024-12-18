@@ -258,6 +258,7 @@ namespace Boogle_Thomas_Pautras
         }
         #endregion
 
+        #region IA
         /// <summary>
         /// Fonction simulant un tour d'une IA, en 
         /// fonction principalement de la difficulté
@@ -315,5 +316,6 @@ namespace Boogle_Thomas_Pautras
             }
             return null;
         }
+        #endregion
     }
 }
