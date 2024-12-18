@@ -4,6 +4,8 @@ using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing.Imaging;
+using System.Diagnostics;
+using System.IO;
 
 
 public class NuageMots
@@ -71,16 +73,27 @@ public class NuageMots
 
             try
             {
-                
+
                 bitmap.Save(cheminSortie, System.Drawing.Imaging.ImageFormat.Png);
             }
             catch (System.Runtime.InteropServices.ExternalException)
             {
                 throw new Exception($"Erreur lors de la sauvegarde de l'image : {cheminSortie}");
             }
+            string path = Path.Combine(Directory.GetCurrentDirectory(), cheminSortie);
+            this.ImageViewer(path);
         }
     }
 
+    public void ImageViewer(string path)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true
+        };
+        Process.Start(psi);
+    }
 
 
     /// <summary>
