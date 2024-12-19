@@ -1,0 +1,117 @@
+@startuml BoogleDiagram
+
+namespace Boogle_Thomas_Pautras {
+
+class Jeu {
+  - Joueurs: List<Joueur>
+  - PlateauActuel: Plateau
+  - DictionnaireActuel: Dictionnaire
+  - gameIsActive: boolean
+  - nbTours: int
+  + Jeu(joueurs: List<Joueur>, plateau: Plateau, dictionnaire: Dictionnaire, nbTours: int)
+  + {static} selectJoueurs(): List<Joueur>
+  + {static} selectTours(): int
+  + {static} selectLang(): String
+  + AfficherMenu(): String
+  + AfficherRegles(): void
+  + AfficherTour(joueur: Joueur): void
+  + AfficherScores(): void
+  + LancerBoogle(jeu: Jeu): void
+  + LancerPartie(): void
+}
+
+class Joueur {
+  - name: String
+  - score: int
+  - words: String[]
+  - isAi: boolean
+  - difficulte: int
+  + Name: String <<get>>
+  + IsAi: boolean <<get>>
+  + Difficulte: int <<get>>
+  + Score: int <<get,set>>
+  + Words: String[] <<get>>
+  + Joueur(name: String)
+  + Joueur(name: String, isAi: boolean, difficulte: int)
+  + Contain(mot: String): boolean
+  + Add_Mot(mot: String): void
+  + toString(): String
+}
+
+class De {
+  - letters: char[]
+  - finalLetter: char
+  + FinalLetter: char <<get>>
+  + Letters: char[] <<get,set>>
+  + De(letters: char[])
+  + Lance(r: Random): void
+  + toString(): String
+}
+
+class Plateau {
+  - n: int
+  - des: De[,]
+  - r: Random
+  - DicoLettre: Dictionary<char,(int,int)>
+  - plateauActuel: char[,]
+  + Plateau(n: int)
+  + surPlateau(mot: String): boolean
+  - motPossible(i: int, j: int, counter: int, mot: String, tested: boolean[,]): boolean
+  + CréationDicoLettres(): Dictionary<char,(int,int)>
+  + calculerPoints(mot: String): int
+  + ChoixLettres(nombreLettres: int): char[]
+  + AIList(difficulté: int, monDico: Dictionary<int,List<string>>, IA: Joueur): List<String>
+  + toString(): String
+}
+
+class Dictionnaire {
+  - dict: List<String>
+  - length: int
+  - lang: String
+  - dictionarySorted: Dictionary<int,List<String>>
+  + Lang: String <<get>>
+  + Length: int <<get>>
+  + Dict: List<String> <<get>>
+  + DictionarySorted: Dictionary<int,List<String>> <<get>>
+  + Dictionnaire(lang: String)
+  + toString(): String
+  + RechDichoRecursif(start: int, end: int, wordToFind: String): boolean
+}
+
+class NuageMots {
+  - width: int
+  - height: int
+  - random: Random
+  - mots: Dictionary<String,int>
+  - rectanglesOccupes: List<Rectangle>
+  + NuageMots(mots: Dictionary<String,int>, width: int, height: int)
+  + GenererNuage(): void
+  - CalculerTaillePolice(occurrences: int, min: int, max: int): float
+  - ObtenirCouleurAleatoire(): Color
+  - TrouverPosition(g: Graphics, mot: String, font: Font): Point
+  - EstPositionLibre(nouveauRect: Rectangle): boolean
+}
+
+class NuageForm {
+  + NuageForm(imagePath: String)
+}
+
+class SortRace {
+  - {static} dict: List<String>
+  + {static} RechDichoRecursif(start: int, end: int, wordToFind: String): boolean
+  + {static} Lineaire(target: String): boolean
+  + {static} DichoSimple(target: String): boolean
+  + {static} Race(iterations: int): void
+}
+
+' Relations
+Jeu "1" *-- "1..*" Joueur : contient >
+Jeu "1" *-- "1" Plateau : possède >
+Jeu "1" *-- "1" Dictionnaire : utilise >
+Plateau "1" *-- "16" De : compose >
+Plateau "1" --> "1" NuageMots : utilise >
+NuageMots "1" --> "1" NuageForm : crée >
+
+}
+
+@enduml
